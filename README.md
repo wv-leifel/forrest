@@ -1,11 +1,11 @@
 
-# Salesforce REST API Client for Laravel 5 <img align="right" src="https://raw.githubusercontent.com/omniphx/images/master/ForrestAdmin.png">
+# Salesforce REST API Client for Laravel 5 <img align="right" src="https://raw.githubusercontent.com/leifel/images/master/ForrestAdmin.png">
 
 [![Laravel](https://img.shields.io/badge/Laravel-5.8-orange.svg?style=flat-square)](http://laravel.com)
-[![Latest Stable Version](https://img.shields.io/packagist/v/omniphx/forrestadmin.svg?style=flat-square)](https://packagist.org/packages/omniphx/forrestadmin)
-[![Total Downloads](https://img.shields.io/packagist/dt/omniphx/forrestadmin.svg?style=flat-square)](https://packagist.org/packages/omniphx/forrestadmin)
-[![License](https://img.shields.io/packagist/l/omniphx/forrestadmin.svg?style=flat-square)](https://packagist.org/packages/omniphx/forrestadmin)
-[![Build Status](https://img.shields.io/travis/omniphx/forrestadmin.svg?style=flat-square)](https://travis-ci.org/omniphx/forrestadmin)
+[![Latest Stable Version](https://img.shields.io/packagist/v/leifel/forrestadmin.svg?style=flat-square)](https://packagist.org/packages/leifel/forrestadmin)
+[![Total Downloads](https://img.shields.io/packagist/dt/leifel/forrestadmin.svg?style=flat-square)](https://packagist.org/packages/leifel/forrestadmin)
+[![License](https://img.shields.io/packagist/l/leifel/forrestadmin.svg?style=flat-square)](https://packagist.org/packages/leifel/forrestadmin)
+[![Build Status](https://img.shields.io/travis/leifel/forrestadmin.svg?style=flat-square)](https://travis-ci.org/leifel/forrestadmin)
 
 
 
@@ -21,7 +21,7 @@ Interested in Eloquent Salesforce Models? Check out [@roblesterjr04](https://git
 
 ForrestAdmin can be installed through composer. Open your `composer.json` file and add the following to the `require` key:
 ```php
-"omniphx/forrestadmin": "2.*"
+"leifel/forrestadmin": "2.*"
 ```
 Next run `composer update` from the command line to install the package.
 
@@ -65,7 +65,7 @@ PASSWORD=password123
 
 >For Lumen, you should copy the config file from `src/config/config.php` and add it to a `forrestadmin.php` configuration file under a config directory in the root of your application. 
 
->For Laravel 4, run `php artisan config:publish omniphx/forrestadmin` which create `app/config/omniphx/forrestadmin/config.php`
+>For Laravel 4, run `php artisan config:publish leifel/forrestadmin` which create `app/config/leifel/forrestadmin/config.php`
 
 ## Getting Started
 ### Setting up a Connected App
