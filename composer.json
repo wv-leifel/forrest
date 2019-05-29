@@ -1,5 +1,5 @@
 {
-    "name": "omniphx/forrest",
+    "name": "omniphx/forrestadmin",
     "description": "Salesforce / Force.com REST API Client for Laravel 5",
     "license":"MIT",
     "keywords":["salesforce", "laravel", "rest", "force.com", "force"],
@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Omniphx\\Forrest\\": "src/Omniphx/Forrest/"
+            "Leifel\\ForrestAdmin\\": "src/Leifel/ForrestAdmin/"
         }
     },
     "minimum-stability": "stable"

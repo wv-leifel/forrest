@@ -1,16 +1,16 @@
 # Contribution Guide
 ## Build
 
-After you've forked the repo, clone forrest into a new Laravel application or existing project. I recommend creating a new directory to store this project to seperate it from the rest of your codebase. This guide will assume it is named `library` but you can call it anything you like.
+After you've forked the repo, clone forrestadmin into a new Laravel application or existing project. I recommend creating a new directory to store this project to seperate it from the rest of your codebase. This guide will assume it is named `library` but you can call it anything you like.
 
-`git clone git@github.com:<username>/forrest.git library/forrest`
+`git clone git@github.com:<username>/forrestadmin.git library/forrestadmin`
 
 Next, update your `composer.json` to include the psr-4 auto-loader location. Your should already see the `App\\` namespace unless you've named it something else:
 ```
 "autoload": {
     "psr-4": {
         "App\\": "app/",
-        "Omniphx\\Forrest\\": "library/forrest/"
+        "Leifel\\ForrestAdmin\\": "library/forrestadmin/"
     },
     "classmap": [
         "database/seeds",
@@ -34,11 +34,11 @@ Next run: `composer update`
 
 From your project's root, add the service provider and alias to your `config/app.php` (same as the install guide):
 ```
-Omniphx\Forrest\Providers\Laravel\ForrestServiceProvider::class
-'Forrest' => Omniphx\Forrest\Providers\Laravel\Facades\Forrest::class
+Leifel\ForrestAdmin\Providers\Laravel\ForrestAdminServiceProvider::class
+'ForrestAdmin' => Leifel\ForrestAdmin\Providers\Laravel\Facades\ForrestAdmin::class
 ```
 
-And publish the forrest configuration: `php artisan vendor:publish`
+And publish the forrestadmin configuration: `php artisan vendor:publish`
 
 For more details on configuration, see the README.md
 
@@ -46,8 +46,8 @@ For more details on configuration, see the README.md
 
 This project uses the PHPSpec testing framework. PHPSpec leverages mocks so that we only test the code that we've written and assume that other libraries and integrations (such as the Salesforce REST API) are working perfectly fine. You can read more about PHPSpec here: `http://www.phpspec.net/en/stable/`
 
-You'll also need to be in the forrest directory, not your root/project directory to run tests.
-1. `cd libary/forrest`
+You'll also need to be in the forrestadmin directory, not your root/project directory to run tests.
+1. `cd libary/forrestadmin`
 2. `composer update`
 3. `vendor/bin/phpspec run` (it should be fast!)
 

@@ -1,4 +1,4 @@
 suites:
- forrest_suits:
-  namespace: Omniphx\Forrest
+ forrestadmin_suits:
+  namespace: Leifel\ForrestAdmin
   spec_prefix: spec

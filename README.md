@@ -1,11 +1,11 @@
 
-# Salesforce REST API Client for Laravel 5 <img align="right" src="https://raw.githubusercontent.com/omniphx/images/master/Forrest.png">
+# Salesforce REST API Client for Laravel 5 <img align="right" src="https://raw.githubusercontent.com/omniphx/images/master/ForrestAdmin.png">
 
 [![Laravel](https://img.shields.io/badge/Laravel-5.8-orange.svg?style=flat-square)](http://laravel.com)
-[![Latest Stable Version](https://img.shields.io/packagist/v/omniphx/forrest.svg?style=flat-square)](https://packagist.org/packages/omniphx/forrest)
-[![Total Downloads](https://img.shields.io/packagist/dt/omniphx/forrest.svg?style=flat-square)](https://packagist.org/packages/omniphx/forrest)
-[![License](https://img.shields.io/packagist/l/omniphx/forrest.svg?style=flat-square)](https://packagist.org/packages/omniphx/forrest)
-[![Build Status](https://img.shields.io/travis/omniphx/forrest.svg?style=flat-square)](https://travis-ci.org/omniphx/forrest)
+[![Latest Stable Version](https://img.shields.io/packagist/v/omniphx/forrestadmin.svg?style=flat-square)](https://packagist.org/packages/omniphx/forrestadmin)
+[![Total Downloads](https://img.shields.io/packagist/dt/omniphx/forrestadmin.svg?style=flat-square)](https://packagist.org/packages/omniphx/forrestadmin)
+[![License](https://img.shields.io/packagist/l/omniphx/forrestadmin.svg?style=flat-square)](https://packagist.org/packages/omniphx/forrestadmin)
+[![Build Status](https://img.shields.io/travis/omniphx/forrestadmin.svg?style=flat-square)](https://travis-ci.org/omniphx/forrestadmin)
 
 
 
@@ -14,14 +14,14 @@ Salesforce/Force.com REST API client for Laravel. While it acts as more of a wra
 
 Currently the only support is for Laravel 4, 5 and Lumen.
 
-Interested in Eloquent Salesforce Models? Check out [@roblesterjr04](https://github.com/roblesterjr04)'s [EloquentSalesForce](https://github.com/roblesterjr04/EloquentSalesForce) project that utilizes Forrest as it's API layer.
+Interested in Eloquent Salesforce Models? Check out [@roblesterjr04](https://github.com/roblesterjr04)'s [EloquentSalesForce](https://github.com/roblesterjr04/EloquentSalesForce) project that utilizes ForrestAdmin as it's API layer.
 
 ## Installation
 >If you are upgrading to Version 2.0, be sure to re-publish your config file.
 
-Forrest can be installed through composer. Open your `composer.json` file and add the following to the `require` key:
+ForrestAdmin can be installed through composer. Open your `composer.json` file and add the following to the `require` key:
 ```php
-"omniphx/forrest": "2.*"
+"omniphx/forrestadmin": "2.*"
 ```
 Next run `composer update` from the command line to install the package.
 
@@ -30,18 +30,18 @@ Next run `composer update` from the command line to install the package.
 Add the service provider and alias to your `config/app.php` file:
 
 ```php
-Omniphx\Forrest\Providers\Laravel\ForrestServiceProvider::class
-'Forrest' => Omniphx\Forrest\Providers\Laravel\Facades\Forrest::class
+Leifel\ForrestAdmin\Providers\Laravel\ForrestAdminServiceProvider::class
+'ForrestAdmin' => Leifel\ForrestAdmin\Providers\Laravel\Facades\ForrestAdmin::class
 ```
 
->For Laravel 4, add `Omniphx\Forrest\Providers\Laravel4\ForrestServiceProvider` in `app/config/app.php`. Alias will remain the same.
+>For Laravel 4, add `Leifel\ForrestAdmin\Providers\Laravel4\ForrestAdminServiceProvider` in `app/config/app.php`. Alias will remain the same.
 
 ### Lumen Installation 
 
 ```php
-class_alias('Omniphx\Forrest\Providers\Laravel\Facades\Forrest', 'Forrest');
-$app->register(Omniphx\Forrest\Providers\Lumen\ForrestServiceProvider::class);
-$app->configure('forrest');
+class_alias('Leifel\ForrestAdmin\Providers\Laravel\Facades\ForrestAdmin', 'ForrestAdmin');
+$app->register(Leifel\ForrestAdmin\Providers\Lumen\ForrestAdminServiceProvider::class);
+$app->configure('forrestadmin');
 $app->withFacades();
 ```
 Then you'll utilize the Lumen service provider by registering it in the `bootstrap/app.php` file.
@@ -51,7 +51,7 @@ You will need a configuration file to add your credentials. Publish a config fil
 ```bash
 php artisan vendor:publish
 ```
-This will publish a `config/forrest.php` file that can switch between authentication types as well as other settings.
+This will publish a `config/forrestadmin.php` file that can switch between authentication types as well as other settings.
 
 After adding the config file, update your `.env` to include the following values (details for getting a consumer key and secret are outlined below):
 ```
@@ -63,9 +63,9 @@ USERNAME=mattjmitchener@gmail.com
 PASSWORD=password123
 ```
 
->For Lumen, you should copy the config file from `src/config/config.php` and add it to a `forrest.php` configuration file under a config directory in the root of your application. 
+>For Lumen, you should copy the config file from `src/config/config.php` and add it to a `forrestadmin.php` configuration file under a config directory in the root of your application. 
 
->For Laravel 4, run `php artisan config:publish omniphx/forrest` which create `app/config/omniphx/forrest/config.php`
+>For Laravel 4, run `php artisan config:publish omniphx/forrestadmin` which create `app/config/omniphx/forrestadmin/config.php`
 
 ## Getting Started
 ### Setting up a Connected App
@@ -91,25 +91,25 @@ Creating authentication routes
 ```php
 Route::get('/authenticate', function()
 {
-    return Forrest::authenticate();
+    return ForrestAdmin::authenticate();
 });
 
 Route::get('/callback', function()
 {
-    Forrest::callback();
+    ForrestAdmin::callback();
 
     return Redirect::to('/');
 });
 ```
 ##### Username-Password authentication flow
-With the Username Password flow, you can directly authenticate with the `Forrest::authenticate()` method.
+With the Username Password flow, you can directly authenticate with the `ForrestAdmin::authenticate()` method.
 
 >To use this authentication you must add your username, and password to the config file. Security token might need to be ammended to your password unless your IP address is whitelisted.
 
 ```php
 Route::get('/authenticate', function()
 {
-    Forrest::authenticate();
+    ForrestAdmin::authenticate();
     return Redirect::to('/');
 });
 ```
@@ -121,7 +121,7 @@ Route::get('/authenticate', function()
 {
     $loginURL = 'https://test.salesforce.com';
 
-    return Forrest::authenticate($loginURL);
+    return ForrestAdmin::authenticate($loginURL);
 });
 ```
 >Note: You can specify a default login URL in your config file.
@@ -130,7 +130,7 @@ Route::get('/authenticate', function()
 After authentication, your app will store an encrypted authentication token which can be used to make API requests.
 ### Query a record
 ```php
-Forrest::query('SELECT Id FROM Account');
+ForrestAdmin::query('SELECT Id FROM Account');
 ```
 Sample result:
 ```JSON
@@ -162,12 +162,12 @@ If you are querying more than 2000 records, you response will include:
 }
 ```
 
-Simply, call `Forrest::next($nextRecordsUrl)` to return the next 2000 records.
+Simply, call `ForrestAdmin::next($nextRecordsUrl)` to return the next 2000 records.
 
 ### Create a new record
 Records can be created using the following format.
 ```php
-Forrest::sobjects('Account',[
+ForrestAdmin::sobjects('Account',[
     'method' => 'post',
     'body'   => ['Name' => 'Dunder Mifflin']
 ]);
@@ -177,7 +177,7 @@ Forrest::sobjects('Account',[
 Update a record with the PUT method.
 
 ```php
-Forrest::sobjects('Account/001i000000xxx',[
+ForrestAdmin::sobjects('Account/001i000000xxx',[
     'method' => 'put',
     'body'   => [
         'Name'  => 'Dunder Mifflin',
@@ -192,7 +192,7 @@ Update a record with the PATCH method and if the external Id doesn't exist, it w
 ```php
 $externalId = 'XYZ1234';
 
-Forrest::sobjects('Account/External_Id__c/' + $externalId, [
+ForrestAdmin::sobjects('Account/External_Id__c/' + $externalId, [
     'method' => 'patch',
     'body'   => [
         'Name'  => 'Dunder Mifflin',
@@ -205,13 +205,13 @@ Forrest::sobjects('Account/External_Id__c/' + $externalId, [
 Delete a record with the DELETE method.
 
 ```php
-Forrest::sobjects('Account/001i000000xxx', ['method' => 'delete']);
+ForrestAdmin::sobjects('Account/001i000000xxx', ['method' => 'delete']);
 ```
 
 ### Setting headers
 Sometimes you need the ability to set custom headers (e.g., creating a Lead with an assignment rule)
 ```php
-Forrest::sobjects('Lead',[
+ForrestAdmin::sobjects('Lead',[
     'method' => 'post',
     'body' => [
         'Company' => 'Dunder Mifflin',
@@ -228,7 +228,7 @@ Forrest::sobjects('Lead',[
 Change the request/response format to XML with the `format` key or make it default in your config file.
 
 ```php
-Forrest::sobjects('Account',['format'=>'xml']);
+ForrestAdmin::sobjects('Account',['format'=>'xml']);
 ```
 
 ## API Requests
@@ -237,7 +237,7 @@ With the exception of the `search` and `query` resources, all resources are requ
 
 You can determine which resources you have access to by calling with the resource method
 ```php
-Forrest::resources();
+ForrestAdmin::resources();
 ```
 This sample output shows the resourses available to call via the API:
 ```php
@@ -262,21 +262,21 @@ Array
 ```
 From the list above, I can call resources by referring to the specified key.
 ```php
-Forrest::theme();
+ForrestAdmin::theme();
 ```
 Or...
 ```php
-Forrest::appMenu();
+ForrestAdmin::appMenu();
 ```
 
 Additional resource url parameters can also be passed in
 ```php
-Forrest::sobjects('Account/describe/approvalLayouts/');
+ForrestAdmin::sobjects('Account/describe/approvalLayouts/');
 ```
 
 As well as new formatting options, headers or other configurations
 ```php
-Forrest::theme(['format'=>'xml']);
+ForrestAdmin::theme(['format'=>'xml']);
 ```
 
 ### Additional API Requests
@@ -284,32 +284,32 @@ Forrest::theme(['format'=>'xml']);
 #### Refresh
 If a refresh token is set, the server can refresh the access token on the user's behalf. Refresh tokens are only for the Web Server flow.
 ```php
-Forrest::refresh();
+ForrestAdmin::refresh();
 ```
 >If you need a refresh token, be sure to specify this under `access scope` in your [Connected App](#setting-up-connected-app). You can also specify this in your configuration file by adding `'scope' => 'full refresh_token'`. Setting scope access in the config file is optional, the default scope access is determined by your Salesforce org.
 
 #### Revoke
 This will revoke the authorization token. The session will continue to store a token, but it will become invalid.
 ```php
-Forrest::revoke();
+ForrestAdmin::revoke();
 ```
 
 #### Versions
 Returns all currently supported versions. Includes the verison, label and link to each version's root:
 ```php
-Forrest::versions();
+ForrestAdmin::versions();
 ```
 
 #### Resources
 Returns list of available resources based on the logged in user's permission and API version.
 ```php
-Forrest::resources();
+ForrestAdmin::resources();
 ```
 
 #### Identity
 Returns information about the logged-in user.
 ```php
-Forrest::identity();
+ForrestAdmin::identity();
 ```
 
 For a complete listing of API resources, refer to the [Force.com REST API Developer's Guide](http://www.salesforce.com/us/developer/docs/api_rest/api_rest.pdf)
@@ -317,11 +317,11 @@ For a complete listing of API resources, refer to the [Force.com REST API Develo
 ### Custom Apex endpoints
 If you create a custom API using Apex, you can use the `custom()` method for consuming them.
 ```php
-Forrest::custom('/myEndpoint');
+ForrestAdmin::custom('/myEndpoint');
 ```
 Additional options and parameters can be passed in like this:
 ```php
-Forrest::custom('/myEndpoint', [
+ForrestAdmin::custom('/myEndpoint', [
     'method' => 'post',
     'body' => ['foo' => 'bar'],
     'parameters' => ['flim' => 'flam']]);
@@ -331,12 +331,12 @@ Forrest::custom('/myEndpoint', [
 ### Raw Requests
 If needed, you can make raw requests to an endpoint of your choice.
 ```php
-Forrest::get('/services/data/v20.0/endpoint');
-Forrest::head('/services/data/v20.0/endpoint');
-Forrest::post('/services/data/v20.0/endpoint', ['my'=>'param']);
-Forrest::put('/services/data/v20.0/endpoint', ['my'=>'param']);
-Forrest::patch('/services/data/v20.0/endpoint', ['my'=>'param']);
-Forrest::delete('/services/data/v20.0/endpoint');
+ForrestAdmin::get('/services/data/v20.0/endpoint');
+ForrestAdmin::head('/services/data/v20.0/endpoint');
+ForrestAdmin::post('/services/data/v20.0/endpoint', ['my'=>'param']);
+ForrestAdmin::put('/services/data/v20.0/endpoint', ['my'=>'param']);
+ForrestAdmin::patch('/services/data/v20.0/endpoint', ['my'=>'param']);
+ForrestAdmin::delete('/services/data/v20.0/endpoint');
 ```
 
 ### Raw response output
@@ -345,14 +345,14 @@ By default, this package will return the body of a response as either a deserial
 There might be times, when you would rather handle this differently. To do this, simply use any format other than 'json' or 'xml' and the code will return a Guzzle response object.
 
 ```php
-$response = Forrest::sobjects($resource, ['format'=> 'none']);
+$response = ForrestAdmin::sobjects($resource, ['format'=> 'none']);
 $content = (string) $response->getBody(); // Guzzle response
 ```
 
 ### Event Listener
 This package makes use of Guzzle's event listers
 ```php
-Event::listen('forrest.response', function($request, $response) {
+Event::listen('forrestadmin.response', function($request, $response) {
     dd((string) $response);
 });
 ```
